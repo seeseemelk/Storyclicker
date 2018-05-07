@@ -503,10 +503,10 @@ end
 
 -- Love routines
 function love.load(args)
-	if not args[2] then
-		args[2] = GAME
+	if not args[1] then
+		args[1] = GAME
 	end
-	local storyFile = args[2]
+	local storyFile = args[1]
 
 	storyCode = script.load(storyFile)
 
