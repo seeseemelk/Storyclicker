@@ -137,7 +137,7 @@ function drawText()
 	local topBarHeight = nLines * ui.font:getHeight() + padding * 2
 
 	if #ui.text > 0 then
-		love.graphics.setColor(255, 255, 255, 200)
+		love.graphics.setColor(1, 1, 1, 200)
 		love.graphics.rectangle("fill", leftm, topm, rightm, topBarHeight)
 		love.graphics.setColor(0, 0, 0)
 		love.graphics.rectangle("line", leftm, topm, rightm, topBarHeight)
@@ -192,17 +192,17 @@ function drawButtons()
 		question.w = bw
 		question.h = bh
 
-		love.graphics.setColor(255, 255, 255, 200)
+		love.graphics.setColor(1, 1, 1, 0.78)
 		love.graphics.rectangle("fill", bx, by, bw, bh)
 
 		if ui.textWritten and mouseX > bx and mouseX < bx + bw and mouseY > by and mouseY < by + bh then
 			if love.mouse.isDown(1) then
-				love.graphics.setColor(200, 200, 200)
+				love.graphics.setColor(0.78, 0.78, 0.78, 1)
 			else
-				love.graphics.setColor(100, 100, 100)
+				love.graphics.setColor(0.39, 0.39, 0.39, 1)
 			end
 		else
-			love.graphics.setColor(0, 0, 0)
+			love.graphics.setColor(0, 0, 0, 1)
 		end
 
 		love.graphics.printf(text, bx + padding, by + padding / 2, maxlimit, "center")
@@ -218,22 +218,22 @@ function drawMuteButton()
 	if not effects.audio.muted then
 		if over then
 			if down then
-				love.graphics.setColor(200, 200, 200, 200)
+				love.graphics.setColor(0.78, 0.78, 0.78, 0.78)
 			else
-				love.graphics.setColor(255, 255, 255, 220)
+				love.graphics.setColor(1, 1, 1, 0.86)
 			end
 		else
-			love.graphics.setColor(255, 255, 255, 200)
+			love.graphics.setColor(1, 1, 1, 0.78)
 		end
 	elseif effects.audio.muted then
 		if over then
 			if down then
-				love.graphics.setColor(150, 150, 150, 200)
+				love.graphics.setColor(0.58, 0.58, 0.58, 0.78)
 			else
-				love.graphics.setColor(200, 200, 200, 220)
+				love.graphics.setColor(0.78, 0.78, 0.78, 0.86)
 			end
 		else
-			love.graphics.setColor(200, 200, 200, 200)
+			love.graphics.setColor(0.78, 0.78, 0.78, 0.78)
 		end
 	end
 	love.graphics.ellipse("fill", 20, 20, 15, 15)
@@ -241,13 +241,13 @@ function drawMuteButton()
 	love.graphics.ellipse("line", 20, 20, 15, 15)
 end
 
-local IMAGE_FADE_CONSTANT = (256 / math.sqrt(98))
+local IMAGE_FADE_CONSTANT = math.sqrt(98)
 local IMAGE_TIME = 1 / .3 * 100
 function drawImage()
 	local w, h = love.graphics.getDimensions()
 	if effects.image.enabled and effects.image.image then
 		local alpha = IMAGE_FADE_CONSTANT * math.sqrt(effects.image.tick)
-		love.graphics.setColor(255, 255, 255, alpha)
+		love.graphics.setColor(1, 1, 1, alpha)
 		--local height = h - topBarHeight - bottomBarHeight - margin)
 		local ih = h * .5 -- (buttonHeight + margin) * 4
 		local iw = ih / effects.image.image:getHeight() * effects.image.image:getWidth()
@@ -286,7 +286,7 @@ end
 
 function love.draw()
 	ui.currentFrame = ui.currentFrame + 1
-	love.graphics.setBackgroundColor(255, 0, 255)
+	love.graphics.setBackgroundColor(1, 0, 1)
 
 	-- Draw the background
 	local w, h = love.graphics.getDimensions()
@@ -295,7 +295,7 @@ function love.draw()
 
 
 	if ui.background then
-		love.graphics.setColor(255, 255, 255)
+		love.graphics.setColor(1, 1, 1)
 		local iw, ih = ui.background:getDimensions()
 		love.graphics.draw(ui.background, 0, 0, 0, w / iw, h / ih)
 	end
